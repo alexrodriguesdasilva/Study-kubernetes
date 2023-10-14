@@ -269,3 +269,17 @@ status:
 
 </p>
 </details>
+
+### create a "deployment" in "kubernetes" and expose it using Service LoadBalance
+
+<details><summary>show</summary>
+<p>
+
+```bash
+# Create via CLI 
+$ kubectl create deployment deployment-svc --image=nginx --port=80 --replicas=1
+$ kubectl expose deployment deployment-svc --port=80 --target-port=80 --type=LoadBalancer
+```
+
+</p>
+</details>
