@@ -5,10 +5,28 @@
 
 ```bash
 # create yaml via CLI
-$ kubectl run admin-pod --image=busy-box --command sleep 3200 -dry-run=client -o yaml
+$ kubectl run admin-pod --image=busybox --command sleep 3200 --dry-run=client -o yaml > pod.yaml
 
 # add config Security context
 https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+
+# yaml deploy
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: admin-pod
+  name: admin-pod
+spec:
+  containers:
+  - command:
+    - sleep
+    - "3200"
+    image: busybox
+    name: admin-pod
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN", "SYS_TIME"]
 
 ```
 </p>
