@@ -1,4 +1,4 @@
-### Create a new pod called admin-pod with image busybox. Allow the pod to be able to set system_time. The container should for 3200 seconds
+### Create a new pod called admin-pod with image busybox. Allow the pod to be able to set sys_time. The container should for 3200 seconds
 
 <details><summary>show</summary>
 <p>
@@ -21,12 +21,12 @@ spec:
   containers:
   - command:
     - sleep
-    - "3200"
-    image: busybox
-    name: admin-pod
+    - "3600"
+    image: nginx
+    name: pod
     securityContext:
       capabilities:
-        add: ["NET_ADMIN", "SYS_TIME"]
+        add: ["SYS_TIME"]
 
 ```
 </p>
@@ -311,6 +311,26 @@ status:
 # Create via CLI 
 $ kubectl create deployment deployment-svc --image=nginx --port=80 --replicas=1
 $ kubectl expose deployment deployment-svc --port=80 --target-port=80 --type=LoadBalancer
+```
+
+</p>
+</details>
+
+### Create a deployment called web-proj-268, with image nginx:1.16 and 1 replica, Next upgrade the deployment to version 1.17 using rollint update. Make sure that the version upgrade is recorded in the resource annotation
+
+<details><summary>show</summary>
+<p>
+
+```bash
+# Create a deployment
+kubectl create deployment web-proj-268 --image=nginx:1.16
+
+# Set a new version in deployment
+$ kubectl set image deployment web-proj-268 nginx=nginx:1.17 --record
+
+# Verify history of the deployment 
+$ kubectl rollout history deployment web-proj-268
+
 ```
 
 </p>
