@@ -1,6 +1,20 @@
-### Create a simple pod using 
+### Create a new pod called admin-pod with image busybox. Allow the pod to be able to set system_time. The container should for 3200 seconds
+
+<details><summary>show</summary>
+<p>
+
+```bash
+# create yaml via CLI
+$ kubectl run admin-pod --image=busy-box --command sleep 3200 -dry-run=client -o yaml
+
+# add config Security context
+https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+
+```
 </p>
 </details>
+
+### Create a simple pod using 
 
 <details><summary>show</summary>
 <p>
